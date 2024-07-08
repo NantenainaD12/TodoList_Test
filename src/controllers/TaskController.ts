@@ -40,13 +40,26 @@ const createTask = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const finishTask = async (req: Request, res: Response, next: NextFunction) => {
+const changeTaskStatus = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const taskId = req.params.id; // Assuming you get the task ID from the request parameters
-        const now = new Date();
-        console.log(taskId);
-        //const now = req.body.dateFinish;
+        const taskId = req.params.id; // get idtask from params
+        const existingTask = await getTaskById(taskId);
 
+        //check if idTask is valid as Number
+        const parsedTaskId = parseInt(taskId, 10);
+        if (isNaN(parsedTaskId) || parsedTaskId <= 0) {
+            throw new Error('Invalid taskId');
+        }
+
+        //check if idTack is valid in the table Task
+        if (!existingTask) {
+            return res.status(404).json({ error: 'Task not found' });
+        }
+        var now = req.body.dateFinish || new Date();
+
+        if (existingTask.datefinish) {
+            now = null;
+        }
         // Update the task's dateFinish
         const client = await pool.connect();
         const query = `
@@ -66,15 +79,13 @@ const finishTask = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-// ABOUT UPDATE TASK AND CHECK IF VALID
+// ABOUT UPDATE TASK AND CHECK IF idTask VALID
 
 const getTaskById = async (taskId: string): Promise<TaskModel | null> => {
     try {
         const dbConnexion = await pool.connect();
         const result = await dbConnexion.query<TaskModel>('SELECT * FROM v_taskDone_or_not WHERE idTask = $1', [taskId]);
         dbConnexion.release();
-
-        console.log('id= ' + taskId + ' query = ' + result.rows[0].descriptiontask);
         return result.rows[0] || null;
     } catch (error) {
         console.error('Error fetching task:', error);
@@ -177,4 +188,4 @@ const DeleteTask = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export default { getTasks, createTask, finishTask, updateTaskFieldsById, DeleteTask };
+export default { getTasks, createTask, changeTaskStatus, updateTaskFieldsById, DeleteTask };
