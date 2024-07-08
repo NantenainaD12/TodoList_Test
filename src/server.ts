@@ -6,6 +6,7 @@ import { corsHandler } from './middleware/corsHandler';
 import { loggingHandler } from './middleware/loggingHandler';
 import { routeNotFound } from './middleware/routeNotFound';
 import { server } from './config/config';
+import TaskRoutes, { route } from './routes/TaskRoute';
 
 export const application = express();
 export let httpServer: ReturnType<typeof http.createServer>;
@@ -29,6 +30,9 @@ export const Main = () => {
     application.get('/main/healthcheck', (req, res, next) => {
         return res.status(200).json({ hello: 'aonaaa!' });
     });
+
+    // Routes
+    application.use('/TaskManagement', TaskRoutes);
 
     logging.log('----------------------------------------');
     logging.log('Define Routing Error');
