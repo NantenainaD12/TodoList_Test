@@ -1,0 +1,16 @@
+for test build : node build/server.js
+for run build : npm run build
+for run local dev : nodemon
+tsc compile typescript code
+
+package:
+
+npm install concurrently
+npm install rimraf
+npm install --save-dev typescript ts-node ts-jest supertest jest @types/supertest @types/jest
+npm install --save-dev @types/express @types/node
+npm install express dotenv 
+
+
+tsc --init    
+
