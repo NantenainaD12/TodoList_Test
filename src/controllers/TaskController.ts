@@ -12,6 +12,7 @@ const getTasks = async (req: Request, res: Response, next: NextFunction) => {
         dbConnexion.release();
 
         // Renvoyer les données sous forme de tableau de tâches (Task[])
+         res.status(201);
         res.json(result.rows);
     } catch (error) {
         console.error('Erreur :', error);
@@ -23,6 +24,11 @@ const createTask = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Extract task data from the request (e.g., req.body)
         const { title, descriptionTask, dateCreation } = req.body;
+
+                // Check if attributes are not empty
+        if (!title || !descriptionTask || !dateCreation) {
+            return res.status(400).json({ error: 'Missing required attributes' });
+        }
 
         // Insert the new task into the database
         const client = await pool.connect();
@@ -75,7 +81,7 @@ const changeTaskStatus = async (req: Request, res: Response, next: NextFunction)
         console.log(query);
         client.release();
 
-        res.status(200).json({ message: 'Task uccpdated successfully' });
+        res.status(200).json({ message: 'Task updated successfully' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Something went wrong' });
@@ -83,7 +89,6 @@ const changeTaskStatus = async (req: Request, res: Response, next: NextFunction)
 };
 
 // ABOUT UPDATE TASK AND CHECK IF idTask VALID
-
 const getTaskById = async (taskId: string): Promise<TaskModel | null> => {
     try {
         const dbConnexion = await pool.connect();
@@ -152,8 +157,8 @@ const updateTaskFieldsById = async (req: Request, res: Response, next: NextFunct
         res.status(500).json({ error: 'Something went wrong' });
     }
 };
-
 // END HERE THE UPDATE TASK
+
 
 const DeleteTask = async (req: Request, res: Response, next: NextFunction) => {
     try {
