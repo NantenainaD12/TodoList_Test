@@ -14,3 +14,9 @@ npm install express dotenv
 
 tsc --init    
 
+// PGUSER='avnadmin'
+// PGHOST='todolistdb-nantenainad12-dab6.k.aivencloud.com'
+// PGDATABASE='defaultdb'
+// PGPASSWORD='AVNS_cUrtaI4v56f81-fx_LL'
+// PGPORT='24555'
+
