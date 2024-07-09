@@ -11,6 +11,7 @@ const corsHandler_1 = require("./middleware/corsHandler");
 const loggingHandler_1 = require("./middleware/loggingHandler");
 const routeNotFound_1 = require("./middleware/routeNotFound");
 const config_1 = require("./config/config");
+const TaskRoute_1 = __importDefault(require("./routes/TaskRoute"));
 exports.application = (0, express_1.default)();
 const Main = () => {
     logging.log('----------------------------------------');
@@ -29,6 +30,8 @@ const Main = () => {
     exports.application.get('/main/healthcheck', (req, res, next) => {
         return res.status(200).json({ hello: 'aonaaa!' });
     });
+    // Routes
+    exports.application.use('/TaskManagement', TaskRoute_1.default);
     logging.log('----------------------------------------');
     logging.log('Define Routing Error');
     logging.log('----------------------------------------');
