@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import pool from '../dbConnexion';
 import { TaskModel } from '../model/TaskModel';
 
+
+//Get all Tasks
 const getTasks = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const dbConnexion = await pool.connect();
@@ -40,6 +42,7 @@ const createTask = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+//Finish or unfinish Task
 const changeTaskStatus = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const taskId = req.params.id; // get idtask from params
