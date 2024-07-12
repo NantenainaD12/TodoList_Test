@@ -1,4 +1,4 @@
-Here the project's main URL after deployment into render hosting => https://todolist-colibrideploy.onrender.com
+Here the project's main URL after deployment into render hosting => https://todolist-colibrideploy.onrender.com/TaskManagement/getTasks
 
 Here all the endPoints :
 
@@ -10,12 +10,15 @@ Here all the endPoints :
                                                                               "descriptionTask": "bullshit",
                                                                               "dateCreation": "2024-07-08 10:00:00"
                                                                           }
+                                                                          
          -Marked a Task as finish or not finish => https://todolist-colibrideploy.onrender.com/TaskManagement/changeTaskStatus/idTask
+         
 
          -Update Task fields => https://todolist-colibrideploy.onrender.com/TaskManagement/updateTaskFieldsById/idTask
                             * with JSON data fields you wanna change like => {
                                                                                   "title" : "releas Prod update "
                                                                               }
+                                                                              
          -Delete Task => https://todolist-colibrideploy.onrender.com/TaskManagement/DeleteTask/idTask
 
 How to test the endPoints :
@@ -26,6 +29,7 @@ How to test the endPoints :
         
         -that's it
 
+        
 All the external package :
 
         - nodemon : to restart automatically the server after any change in development 
@@ -35,7 +39,18 @@ All the external package :
         - Jest : for unit Test for each functionality 
 
         - rim raf : to automatically remove the builds folder and create on for each npm run build
-
+        
         - concurently : so that the project can run different script at the same times 
                           for exemple this =>  "build": "concurrently \"rimraf build/\"  \"tsc -p tsconfig.build.json\""
+                          
+        
+How Run the project in local :
+
+        - Run the command line : npm install to install all the dependency needed
+
+        - Run the command line : nodemon to run the server
+
+        - And the test all the url with local url like : localhost:1337/TaskManagement/getTasks
+
+        NB: make sure to have internet connexion because the database is still online
                                                                                                   
