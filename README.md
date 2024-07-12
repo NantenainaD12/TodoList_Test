@@ -1,4 +1,4 @@
-Here the project's main URL after deployment into render hosting => https://todolist-colibrideploy.onrender.com
+Here the project's main URL after deployment into render hosting => https://todolist-colibrideploy.onrender.com/TaskManagement/getTasks
 
 Here all the endPoints :
 
@@ -26,6 +26,11 @@ How to test the endPoints :
         
         -that's it
 
+        - Here an exemple using postman for the test, it's easy :
+        ![Uploading postaman.PNG…]()
+
+                
+
 All the external package :
 
         - nodemon : to restart automatically the server after any change in development 
@@ -35,7 +40,18 @@ All the external package :
         - Jest : for unit Test for each functionality 
 
         - rim raf : to automatically remove the builds folder and create on for each npm run build
-
+        
         - concurently : so that the project can run different script at the same times 
+        
+How Run the project in local :
+
+        - Run the command line : npm install to install all the dependency needed
+
+        - Run the command line : nodemon to run the server
+
+        - And the test all the url with local url like : localhost:1337/TaskManagement/getTasks
+
+        NB: make sure to have internet connexion because the database is still online
+
                           for exemple this =>  "build": "concurrently \"rimraf build/\"  \"tsc -p tsconfig.build.json\""
                                                                                                   
